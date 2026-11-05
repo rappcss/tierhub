@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0d1014">
+<title>TierHub — Minecraft PvP</title>
+<style>
+:root{--bg:#0d1014;--panel:#151a21;--panel2:#1b222b;--line:#29323d;--muted:#8995a5;--text:#edf2f7;--lime:#a7ed75;--lime-dark:#263b20}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -15%,#263b24 0,transparent 34%),var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}
+.wrap{max-width:1160px;margin:auto;padding:0 22px}
+header{height:72px;border-bottom:1px solid var(--line);background:#0d1014ed;backdrop-filter:blur(12px);position:sticky;top:0;z-index:4}
+.nav{height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.5px}.logo{width:36px;height:36px;border-radius:10px;background:var(--lime);color:#10170c;display:grid;place-items:center;font-size:20px}.brand small{display:block;font-size:9px;color:var(--muted);letter-spacing:2px}.links{display:flex;gap:23px}.links a{color:#aeb8c5;text-decoration:none;font-size:13px}.links a:hover{color:var(--lime)}.discord{border:1px solid #394452;background:#202833;color:var(--text);border-radius:9px;padding:10px 14px;font-weight:750}
+.hero{padding:53px 0 28px;display:grid;grid-template-columns:1.25fr .75fr;gap:22px;align-items:center}.eyebrow{color:var(--lime);font-size:10px;font-weight:850;letter-spacing:2px}.hero h1{font-size:clamp(38px,6vw,64px);letter-spacing:-2.5px;line-height:1.02;margin:12px 0}.hero h1 span{color:var(--lime)}.hero p{color:var(--muted);max-width:570px;margin:0 0 21px}.actions{display:flex;gap:10px;flex-wrap:wrap}.primary{background:var(--lime);color:#10170c;border:0;border-radius:9px;padding:11px 16px;font-weight:850}.secondary{background:#171e26;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:11px 16px;font-weight:700}
+.season{background:linear-gradient(145deg,#1d2b1d,#151a21 72%);border:1px solid #394c32;border-radius:15px;padding:21px;min-height:170px;position:relative;overflow:hidden}.season:after{content:"✦";position:absolute;right:12px;top:-38px;font-size:155px;color:#a7ed750b}.season small{color:var(--lime);font-weight:850;letter-spacing:1.5px}.season h3{font-size:23px;margin:8px 0}.season p{color:var(--muted);font-size:12px;margin:0}.season b{display:block;margin-top:18px;font-size:12px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin:8px 0 30px}.stat,.panel,.mode{background:var(--panel);border:1px solid var(--line);border-radius:12px}.stat{padding:14px 16px}.stat label{color:var(--muted);font-size:11px}.stat strong{display:block;font-size:25px;margin-top:3px}
+.heading{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:26px 0 13px}.heading h2{font-size:19px;margin:0}.heading p{font-size:12px;color:var(--muted);margin:3px 0 0}
+.modes{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.mode{display:flex;align-items:center;gap:11px;padding:13px;transition:.18s}.mode:hover{border-color:#637d50;transform:translateY(-2px)}.mode-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:10px;background:#202b21;font-size:19px}.mode b{font-size:13px;display:block}.mode small{font-size:10px;color:var(--muted)}
+.columns{display:grid;grid-template-columns:1.2fr .8fr;gap:13px;margin:0 0 55px}.panel{padding:17px}.panel h3{margin:0 0 13px;font-size:15px}.table{width:100%;border-collapse:collapse;text-align:left;font-size:12px}.table th{color:var(--muted);font-weight:600;padding:10px 7px;border-bottom:1px solid var(--line)}.table td{padding:12px 7px;border-bottom:1px solid #242c35}.table tr:last-child td{border:0}.player{display:flex;align-items:center;gap:8px;font-weight:700}.avatar{width:27px;height:27px;border-radius:8px;background:#29352a;display:grid;place-items:center}
+.tier{display:inline-grid;place-items:center;min-width:34px;padding:3px 7px;border-radius:6px;font-weight:900;background:#252b34}.D{color:#a0a8b3}.Dp{color:#bac2cc}.C{color:#7ec5ef}.Cp{color:#54a8df}.B{color:#77d9a1}.Bp{color:#42c982}.A{color:#c5a0fa}.Ap{color:#a779f0}.S{color:#f1cb65;background:#39311d}
+.form-row{display:grid;gap:9px;margin:10px 0}.form-row label{font-size:11px;color:var(--muted)}input,select,textarea{width:100%;background:#0f141a;border:1px solid #303a46;color:var(--text);padding:10px 11px;border-radius:8px;outline:none}input:focus,select:focus,textarea:focus{border-color:#91cb68}.notice{font-size:11px;color:var(--muted);margin-top:10px}.result{margin-top:10px;color:var(--lime);font-size:12px;min-height:18px}
+footer{border-top:1px solid var(--line);padding:20px 0;color:var(--muted);font-size:11px}
+@media(max-width:760px){.links{display:none}.hero{grid-template-columns:1fr;padding-top:38px}.season{min-height:140px}.stats{grid-template-columns:repeat(2,1fr)}.modes{grid-template-columns:repeat(2,1fr)}.columns{grid-template-columns:1fr}.wrap{padding:0 15px}}
+@media(max-width:380px){.mode{padding:10px}.mode-icon{width:33px;height:33px}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <div class="brand"><div class="logo">T</div><div>TIERHUB<small>MINECRAFT PVP COMMUNITY</small></div></div>
+  <nav class="links"><a class="active" href="#home">Overview</a><a href="#gamemodes">Gamemodes</a><a href="#leaderboard">Leaderboard</a><a href="#apply">Apply test</a></nav>
+  <button class="discord" id="loginBtn">↗ Discord Login</button>
+</div></header>
+<main class="wrap" id="home">
+  <section class="hero">
+    <div><div class="eyebrow">COMMUNITY TIER NETWORK</div><h1>PROVE YOUR<br><span>SKILL.</span> EARN YOUR TIER.</h1>
+      <p>A competitive Minecraft PvP ranking hub. Check community rankings, explore gamemodes, and apply for your next tier test.</p>
+      <div class="actions"><a href="#apply"><button class="primary">Apply for a test ↗</button></a><a href="#leaderboard"><button class="secondary">View leaderboard</button></a></div>
+    </div>
+    <aside class="season"><small>SEASON 01 · COMMUNITY</small><h3>Your next rank starts here.</h3><p>Play fair. Show your skill. Let the results speak.</p><b>9 RANKS &nbsp;·&nbsp; 8 GAMEMODES</b></aside>
+  </section>
+  <section class="stats">
+    <div class="stat"><label>REGISTERED PLAYERS</label><strong>128</strong></div><div class="stat"><label>TESTS COMPLETED</label><strong>342</strong></div><div class="stat"><label>GAMEMODES</label><strong>08</strong></div><div class="stat"><label>TIER LEVELS</label><strong>09</strong></div>
+  </section>
+  <section id="gamemodes">
+    <div class="heading"><div><h2>Gamemodes</h2><p>Choose a category to explore its player rankings.</p></div><span class="subtle">8 categories</span></div>
+    <div class="modes" id="modeGrid"></div>
+  </section>
+  <section class="columns">
+    <div id="leaderboard">
+      <div class="heading"><div><h2>Top players</h2><p>Community leaderboard · demo data</p></div><select id="modeFilter" style="width:auto;min-width:110px"><option>Sword</option><option>Axe</option><option>Crystal</option><option>UHC</option><option>Pot</option><option>NethOP</option><option>SMP</option><option>Mace</option></select></div>
+      <div class="panel"><table class="table"><thead><tr><th>#</th><th>PLAYER</th><th>RANK</th><th>TESTS</th></tr></thead><tbody id="leaderRows"></tbody></table></div>
+    </div>
+    <div id="apply">
+      <div class="heading"><div><h2>Apply for a test</h2><p>Send a tier test request to the team.</p></div></div>
+      <div class="panel">
+        <form id="applyForm">
+          <div class="form-row"><label>MINECRAFT USERNAME</label><input id="mcName" placeholder="YourInGameName" required maxlength="24"></div>
+          <div class="form-row"><label>DISCORD USERNAME</label><input id="discordName" placeholder="name or @username" required maxlength="40"></div>
+          <div class="form-row"><label>GAMEMODE</label><select id="applyMode"><option>Sword</option><option>Axe</option><option>Crystal</option><option>UHC</option><option>Pot</option><option>NethOP</option><option>SMP</option><option>Mace</option></select></div>
+          <div class="form-row"><label>REQUESTED TIER</label><select id="requestedTier"><option>D</option><option>D+</option><option>C</option><option>C+</option><option>B</option><option>B+</option><option>A</option><option>A+</option><option>S</option></select></div>
+          <button class="primary" type="submit" style="width:100%">Submit request</button>
+          <div class="result" id="formResult" aria-live="polite"></div>
+        </form>
+        <p class="notice">Demo only: requests stay in this browser and are not sent to Discord or a server yet.</p>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">TIERHUB · COMMUNITY PROJECT <span style="float:right">Unofficial Minecraft PvP community site</span></div></footer>
+<script>
+const modes=[["Sword","⚔️","Classic sword combat"],["Axe","🪓","Axe & shield combat"],["Crystal","💎","Crystal PvP"],["UHC","🏹","Ultra Hardcore"],["Pot","🧪","Potion PvP"],["NethOP","🔥","Netherite OP"],["SMP","🌲","Survival PvP"],["Mace","🔨","Mace combat"]];
+const ranks=["D","D+","C","C+","B","B+","A","A+","S"];
+const players=[["BlockRider","S",42],["VoidPvP","A+",37],["KuroCraft","A",31],["Nexxus","B+",24],["Rapp","B",18]];
+const modeGrid=document.getElementById("modeGrid");
+modes.forEach(([name,icon,desc])=>{const el=document.createElement("button");el.className="mode";el.innerHTML=`<span class="mode-icon">${icon}</span><span><b>${name}</b><small>${desc}</small></span>`;el.onclick=()=>{document.getElementById("modeFilter").value=name;renderRows()};modeGrid.appendChild(el)});
+function renderRows(){document.getElementById("leaderRows").innerHTML=players.map((p,i)=>`<tr><td>${String(i+1).padStart(2,"0")}</td><td><span class="player"><span class="avatar">⛏</span>${p[0]}</span></td><td><span class="tier ${p[1].replace("+","p")}">${p[1]}</span></td><td>${p[2]}</td></tr>`).join("")}
+renderRows();document.getElementById("modeFilter").addEventListener("change",renderRows);
+document.getElementById("loginBtn").onclick=()=>alert("Discord OAuth is not connected yet. The server owner must provide a Discord Application ID, redirect URL setup, and bot/server permissions before enabling real login.");
+document.getElementById("applyForm").addEventListener("submit",e=>{e.preventDefault();const req={minecraft:document.getElementById("mcName").value,discord:document.getElementById("discordName").value,mode:document.getElementById("applyMode").value,tier:document.getElementById("requestedTier").value,createdAt:new Date().toISOString()};const all=JSON.parse(localStorage.getItem("tierhub_demo_requests")||"[]");all.push(req);localStorage.setItem("tierhub_demo_requests",JSON.stringify(all));document.getElementById("formResult").textContent="Demo request saved in this browser. Backend connection is still needed.";e.target.reset()});
+</script>
+</body></html>
